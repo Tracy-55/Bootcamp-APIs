@@ -1,0 +1,44 @@
+### Words Widget API
+# GET route to analyze a sentence
+GET http://localhost:3000/api/word_game?sentence=The%20quick%20brown%20fox
+Accept: application/json
+
+###
+
+### Total Phone Bill API
+# POST route to calculate total phone bill
+POST http://localhost:3000/api/phonebill/total
+Content-Type: application/json
+
+{
+    "bill": "call,sms,call"
+}
+
+###
+
+# GET route to get the prices of calls and SMS
+GET http://localhost:3000/api/phonebill/prices
+Accept: application/json
+
+###
+
+# POST route to set the price for call or SMS
+POST http://localhost:3000/api/phonebill/price
+Content-Type: application/json
+
+{
+    "type": "call",
+    "price": 3.00
+}
+
+###
+
+### Enough Airtime API
+# POST route to check if the user has enough airtime
+POST http://localhost:3000/api/enough
+Content-Type: application/json
+
+{
+    "usage": "call,sms,call",
+    "available": 10
+}

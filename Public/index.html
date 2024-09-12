@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootcamp APIs</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="https://unpkg.com/alpinejs"></script>
+  </head>
+
+  <script>
+    // AlpineJS Word Game
+    function wordGame() {
+      return {
+        sentence: "",
+        result: null,
+        async analyzeSentence() {
+          try {
+            const res = await fetch(`/api/word_game?sentence=${this.sentence}`);
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            this.result = await res.json();
+            console.log("Word Game Result:", this.result);
+          } catch (error) {
+            console.error("Error fetching word game data:", error);
+          }
+        },
+      };
+    }
+
+    // AlpineJS Phone Bill
+    function phoneBill() {
+      return {
+        bill: "",
+        total: null,
+        async calculateBill() {
+          try {
+            const res = await fetch("/api/phonebill/total", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ bill: this.bill }),
+            });
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            const data = await res.json();
+            this.total = data.total;
+            console.log("Total Phone Bill:", this.total);
+          } catch (error) {
+            console.error("Error calculating phone bill:", error);
+          }
+        },
+      };
+    }
+
+    // AlpineJS Airtime
+    function airtime() {
+      return {
+        usage: "",
+        available: 0,
+        result: null,
+        async checkAirtime() {
+          try {
+            const res = await fetch("/api/enough", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                usage: this.usage,
+                available: this.available,
+              }),
+            });
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            const data = await res.json();
+            this.result = data.result;
+            console.log("Airtime Check Result:", this.result);
+          } catch (error) {
+            console.error("Error checking airtime:", error);
+          }
+        },
+      };
+    }
+  </script>
+
+  <body>
+    <div class="container">
+      <!-- Word Game Widget -->
+      <div x-data="wordGame()" class="widget">
+        <h2>Word Game API</h2>
+        <input type="text" x-model="sentence" placeholder="Enter a sentence" />
+        <button @click="analyzeSentence">Analyze</button>
+        <div x-show="result">
+          <p>Longest Word: <span x-text="result.longestWord"></span></p>
+          <p>Shortest Word: <span x-text="result.shortestWord"></span></p>
+          <p>Sum of Characters: <span x-text="result.sum"></span></p>
+        </div>
+      </div>
+
+      <!-- Phone Bill Widget -->
+      <div x-data="phoneBill()" class="widget">
+        <h2>Total Phone Bill API</h2>
+        <input
+          type="text"
+          x-model="bill"
+          placeholder="Enter bill (call,sms,call)" />
+        <button @click="calculateBill">Calculate</button>
+        <div x-show="total">
+          <p>Total: <span x-text="total"></span></p>
+        </div>
+      </div>
+
+      <!-- Airtime Widget -->
+      <div x-data="airtime()" class="widget">
+        <h2>Enough Airtime API</h2>
+        <input type="text" x-model="usage" placeholder="Usage (call,sms)" />
+        <input
+          type="number"
+          x-model="available"
+          placeholder="Available airtime" />
+        <button @click="checkAirtime">Check</button>
+        <div x-show="result">
+          <p>Result: <span x-text="result"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // AlpineJS Word Game
+      function wordGame() {
+        return {
+          sentence: "",
+          result: null,
+          async analyzeSentence() {
+            const res = await fetch(`/api/word_game?sentence=${this.sentence}`);
+            this.result = await res.json();
+          },
+        };
+      }
+
+      // AlpineJS Phone Bill
+      function phoneBill() {
+        return {
+          bill: "",
+          total: null,
+          async calculateBill() {
+            const res = await fetch("/api/phonebill/total", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ bill: this.bill }),
+            });
+            const data = await res.json();
+            this.total = data.total;
+          },
+        };
+      }
+
+      // AlpineJS Airtime
+      function airtime() {
+        return {
+          usage: "",
+          available: 0,
+          result: null,
+          async checkAirtime() {
+            const res = await fetch("/api/enough", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                usage: this.usage,
+                available: this.available,
+              }),
+            });
+            const data = await res.json();
+            this.result = data.result;
+          },
+        };
+      }
+    </script>
+  </body>
+</html>

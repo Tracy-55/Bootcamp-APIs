@@ -1,0 +1,150 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Main container styles */
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Heading styles */
+h1 {
+    font-size: 32px;
+    color: #3b3b3b;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+
+/* Form styles */
+form {
+    margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #d1d1d1;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+button {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background-color: #ff5252;
+    transform: translateY(-2px);
+}
+
+/* Result styles */
+.result {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #e0ffe5;
+    border-radius: 6px;
+    border-left: 5px solid #4CAF50;
+}
+
+.result p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Widget-specific styles */
+.widget {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.widget:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.widget h2 {
+    font-size: 24px;
+    color: #ff6b6b;
+    margin-bottom: 15px;
+}
+
+.widget input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d1d1;
+}
+
+.widget button {
+    background-color: #3498db;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 6px;
+}
+
+.widget button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .widget h2 {
+        font-size: 20px;
+    }
+}
